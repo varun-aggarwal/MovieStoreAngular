@@ -1,0 +1,49 @@
+<div>
+	<p class="text-left">
+		<em>Addresses</em>
+	</p>
+	<div class="list-group">
+		<form name="addressForm" ng-submit="addressForm.$valid && addressCtrl.addAddress(accCtrl.user)" novalidate>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Street Name</th>
+						<th>Postcode</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="address in accCtrl.user.addresses | orderBy:address.addressName" ng-show="accCtrl.user.addresses.length">
+						<td>{{address.addressName}}</td>
+						<td>{{address.street}}</td>
+						<td>{{address.postcode}}</td>
+					</tr>
+					<tr>
+						<td>
+							<fieldset class="form-group">
+								<input ng-model="addressCtrl.address.addressName" type="string" class="form-control" placeholder="Name" title="Name" required/>
+							</fieldset>
+						</td>
+						<td>
+							<fieldset class="form-group">
+								<input ng-model="addressCtrl.address.street" type="string" class="form-control" placeholder="Street" title="Street" required/>
+							</fieldset>
+						</td>
+						<td>
+							<fieldset class="form-group">
+								<input ng-model="addressCtrl.address.postcode" type="string" class="form-control" placeholder="Postcode" title="Postcode" required/>
+							</fieldset>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=3>
+							<fieldset class="form-group" > 
+								<input type="submit" class="btn btn-primary pull-right" value="Submit New Address"  />
+							</fieldset>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>

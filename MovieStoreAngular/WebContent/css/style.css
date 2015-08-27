@@ -1,0 +1,10 @@
+.list-group {
+width: 800px;
+padding-left: 100px
+}
+.ng-invalid.ng-dirty {
+ border-color: red;
+}
+.ng-valid.ng-dirty {
+ border-color: green;
+}
