@@ -1,21 +1,29 @@
 (function () {
-	var app = angular.module('movieStore', []);
+	var app = angular.module('movieStore', ['store-products','address']);
 
-	app.controller('StoreController', function () {
-		this.title = "Angular Chapter 4 - 5"
-			this.products = movies;
-	});
+	app.controller('StoreController',['$http','$location', function ($http,$location) {
+		var store = this;
+		store.title = "Angular Chapter 4 - 5"
+		store.products = movies;
+		store.user = [];
+		var currURL = $location.absUrl();
+		$http.get(currURL+'store/user')
+		    .success(function(data) {
+		    	store.user = data;
+		    });
+		
+	}]);
 
 	app.directive("navigation", function () {
 		return {
 			restrict : "E",
 			templateUrl : "navigation.html",
-			controller : function () {
-				this.plus_minus_image = "plus.png";
+			transclude: true,
+		    controller : function ($scope) {
+		    	this.plus_minus_image = "plus.png";
 				this.notCollapsed = false;
-				this.user = userDetails;
 				this.toggleImage = function () {
-
+					this.user = $scope.store.user;
 					if (this.plus_minus_image == "plus.png") {
 						this.plus_minus_image = "minus.png";
 						this.notCollapsed = true;
@@ -29,77 +37,6 @@
 			controllerAs : "accCtrl"
 		};
 	});
-
-	app.directive("productGallery", function () {
-		return {
-			restrict : "E",
-			templateUrl : "product-gallery.html",
-			controller : function () {
-				this.current = 0;
-				this.setCurrent = function (imageNumber) {
-					this.current = imageNumber || 0;
-				};
-			},
-			controllerAs : "gallery"
-		};
-	});
-
-	app.directive("productReviews", function () {
-		return {
-			restrict : "E",
-			templateUrl : "product-reviews.html",
-		};
-	});
-
-	app.directive("productRating", function () {
-		return {
-			restrict : "A",
-			templateUrl : "product-rating.html"
-		};
-	});
-
-	app.directive("address", function () {
-		return {
-			restrict : "E",
-			templateUrl : "address.html",
-			controller : function () {
-				this.addAddress = function (user) {
-					user.addresses.push(this.address);
-					this.address = {};
-				};
-			},
-			controllerAs : "addressCtrl"
-		};
-	});
-
-	app.directive("productTabs", function () {
-		return {
-			restrict : "E",
-			templateUrl : "product-tabs.html",
-			controller : function () {
-				this.tab = 1;
-
-				this.isSet = function (checkTab) {
-					return this.tab === checkTab;
-				};
-
-				this.setTab = function (activeTab) {
-					this.tab = activeTab;
-				};
-			},
-			controllerAs : "tab"
-		};
-	});
-
-	var userDetails = {
-		name : 'Varun Aggarwal',
-		addresses : [{
-				addressName : 'Varun Aggarwal',
-				street : 'Amstelveensweg',
-				postcode : '1054MC'
-			}
-		]
-	};
 
 	var movies = [{
 			name : 'Kung Fu Panda',
