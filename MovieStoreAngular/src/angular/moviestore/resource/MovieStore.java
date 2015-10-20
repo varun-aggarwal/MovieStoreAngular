@@ -1,4 +1,4 @@
-package com.varun.angular.moviestore.resource;
+package angular.moviestore.resource;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -9,21 +9,23 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
-import com.varun.angular.moviestore.domain.Address;
-import com.varun.angular.moviestore.domain.User;
-import com.varun.angular.moviestore.domain.dto.AddressDto;
-import com.varun.angular.moviestore.service.UserDetailService;
+
+import angular.moviestore.domain.Address;
+import angular.moviestore.domain.dto.AddressDto;
+import angular.moviestore.domain.impl.MovieStoreUser;
+import angular.moviestore.service.UserDetailService;
 
 @Path("/user")
 public class MovieStore {
 
     static final String ADDRESS_PATH = "/address";
+
     private UserDetailService userDetailService = new UserDetailService();
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response get() {
-        User user = null;
+        MovieStoreUser user = null;
         user = userDetailService.getUserData();
         Gson gson = new Gson();
         return Response.ok().entity(gson.toJson(user)).build();

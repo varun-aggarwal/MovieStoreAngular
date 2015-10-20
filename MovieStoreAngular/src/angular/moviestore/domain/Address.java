@@ -1,22 +1,11 @@
-package com.varun.angular.moviestore.domain.dto;
+package angular.moviestore.domain;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-public class AddressDto {
+public class Address {
 
-    @XmlElement
     private String addressName;
-    @XmlElement
     private String street;
-    @XmlElement
     private String postcode;
-    
-    public AddressDto() {
-        
-    }
     
     /**
      * @return the addressName
@@ -60,6 +49,13 @@ public class AddressDto {
         this.postcode = postcode;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Address [addressName=" + addressName + ", street=" + street + ", postcode=" + postcode + "]";
+    }
     
     
 }
