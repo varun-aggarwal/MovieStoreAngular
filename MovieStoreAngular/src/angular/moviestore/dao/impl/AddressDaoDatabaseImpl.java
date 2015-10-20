@@ -13,7 +13,7 @@ import angular.moviestore.datasource.api.factory.DataSourceFactory;
 import angular.moviestore.datasource.util.DatabaseUtil;
 import angular.moviestore.domain.Address;
 
-public class AddressDaoImpl implements AddressDao {
+public class AddressDaoDatabaseImpl implements AddressDao {
 
     private DataSource dataSource = (new DataSourceFactory()).getDataSource();
 
